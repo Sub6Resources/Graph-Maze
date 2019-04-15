@@ -23,10 +23,18 @@ inline std::ostream &operator<<(std::ostream &out, Maze &maze) {
     for (int y = 0; y < numRows; ++y) {
         //Top of row
         for (int x = 0; x <maze.mazeWidth; ++x) {
-            char mazeSquare = maze.mazeData[(maze.mazeWidth * y + x / 2)];
+            int index = (maze.mazeWidth * y + x);
+            unsigned char mazeSquare = maze.mazeData[index / 2];
+            if(index % 2 == 0) {
+                mazeSquare = mazeSquare >> 4;
+            }
             out << "#";
 
-            out << " ";
+            if((mazeSquare & 4) == 4) {
+                out << " ";
+            } else {
+                out << "#";
+            }
 
             //Print right wall if on last column
             if(x == maze.mazeWidth - 1) {
@@ -37,14 +45,28 @@ inline std::ostream &operator<<(std::ostream &out, Maze &maze) {
 
         //Middle of row
         for (int x = 0; x < maze.mazeWidth; ++x) {
-            char mazeSquare = maze.mazeData[(maze.mazeWidth * y + x / 2)];
-            out << " ";
+            int index = (maze.mazeWidth * y + x);
+            unsigned char mazeSquare = maze.mazeData[index / 2];
+            if(index % 2 == 0) {
+                mazeSquare = mazeSquare >> 4;
+            }
 
-            out << mazeSquare;
+            if((mazeSquare & 2) == 2) {
+                out << " ";
+            } else {
+                out << "#";
+            }
+
+//            out << mazeSquare;
+            out << " ";
 
             //Print right wall if on last column
             if(x == maze.mazeWidth - 1) {
-                out << " ";
+                if((mazeSquare & 8) == 8) {
+                    out << " ";
+                } else {
+                    out << "#";
+                }
             }
         }
         out << '\n';
@@ -53,8 +75,18 @@ inline std::ostream &operator<<(std::ostream &out, Maze &maze) {
         if(y == (numRows - 1)) {
             //Bottom of row
             for (int x = 0; x < maze.mazeWidth; ++x) {
-                char mazeSquare = maze.mazeData[(maze.mazeWidth * y + x / 2)];
-                out << "# ";
+                int index = (maze.mazeWidth * y + x);
+                unsigned char mazeSquare = maze.mazeData[index / 2];
+                if(index % 2 == 0) {
+                    mazeSquare = mazeSquare >> 4;
+                }
+                out << "#";
+
+                if((mazeSquare & 1) == 1) {
+                    out << " ";
+                } else {
+                    out << "#";
+                }
 
                 //Print right wall if on last column
                 if(x == maze.mazeWidth - 1) {
