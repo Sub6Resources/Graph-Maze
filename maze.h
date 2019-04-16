@@ -6,6 +6,7 @@
 #define GRAPH_MAZE_MAZE_H
 
 #include <iostream>
+//██
 
 class Maze {
 public:
