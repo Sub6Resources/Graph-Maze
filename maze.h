@@ -22,23 +22,23 @@ inline std::ostream &operator<<(std::ostream &out, Maze &maze) {
 
     for (int y = 0; y < numRows; ++y) {
         //Top of row
-        for (int x = 0; x <maze.mazeWidth; ++x) {
+        for (int x = 0; x < maze.mazeWidth; ++x) {
             int index = (maze.mazeWidth * y + x);
             unsigned char mazeSquare = maze.mazeData[index / 2];
             if(index % 2 == 0) {
                 mazeSquare = mazeSquare >> 4;
             }
-            out << "#";
+            out << "█";
 
-            if((mazeSquare & 4) == 4) {
+            if((mazeSquare & 2) == 2) {
                 out << " ";
             } else {
-                out << "#";
+                out << "█";
             }
 
             //Print right wall if on last column
             if(x == maze.mazeWidth - 1) {
-                out << "#";
+                out << "█";
             }
         }
         out << '\n';
@@ -51,10 +51,10 @@ inline std::ostream &operator<<(std::ostream &out, Maze &maze) {
                 mazeSquare = mazeSquare >> 4;
             }
 
-            if((mazeSquare & 2) == 2) {
+            if((mazeSquare & 4) == 4) {
                 out << " ";
             } else {
-                out << "#";
+                out << "█";
             }
 
 //            out << mazeSquare;
@@ -62,10 +62,10 @@ inline std::ostream &operator<<(std::ostream &out, Maze &maze) {
 
             //Print right wall if on last column
             if(x == maze.mazeWidth - 1) {
-                if((mazeSquare & 8) == 8) {
+                if((mazeSquare & 1) == 1) {
                     out << " ";
                 } else {
-                    out << "#";
+                    out << "█";
                 }
             }
         }
@@ -80,17 +80,17 @@ inline std::ostream &operator<<(std::ostream &out, Maze &maze) {
                 if(index % 2 == 0) {
                     mazeSquare = mazeSquare >> 4;
                 }
-                out << "#";
+                out << "█";
 
-                if((mazeSquare & 1) == 1) {
+                if((mazeSquare & 8) == 8) {
                     out << " ";
                 } else {
-                    out << "#";
+                    out << "█";
                 }
 
                 //Print right wall if on last column
                 if(x == maze.mazeWidth - 1) {
-                    out << "#";
+                    out << "█";
                 }
             }
             out << '\n';
