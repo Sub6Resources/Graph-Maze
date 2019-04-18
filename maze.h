@@ -6,15 +6,19 @@
 #define GRAPH_MAZE_MAZE_H
 
 #include <iostream>
+#include "graph.h"
 
 class Maze {
 public:
     Maze(int _mazeWidth, int _mazeBytes, char* _mazeData);
     friend std::ostream &operator<<(std::ostream &out, Maze &maze);
 private:
+    graph<int>* maze;
     char* mazeData;
     int mazeWidth;
     int mazeBytes;
+    void generateMazeGraph();
+    int coords(int x, int y);
 };
 
 inline std::ostream &operator<<(std::ostream &out, Maze &maze) {
