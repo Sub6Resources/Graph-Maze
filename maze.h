@@ -61,7 +61,6 @@ inline std::ostream &operator<<(std::ostream &out, Maze &maze) {
                 out << "█";
             }
 
-//            out << mazeSquare;
             out << " ";
 
             //Print right wall if on last column
