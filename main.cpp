@@ -20,6 +20,18 @@ int main() {
     std::cout << "Maze: " << std::endl;
     std::cout << maze << std::endl;
 
+    maze.setTargetLocation(3, 2);
+
+    std::cout << "Maze w/ target location: " << std::endl;
+    std::cout << maze << std::endl;
+
+    maze.setStartLocation(2, 3);
+
+    std::cout << "Maze w/ start location: " << std::endl;
+    std::cout << maze << std::endl;
+
+    maze.findShortestPath();
+
     delete[] newMazeData;
 
     return 0;

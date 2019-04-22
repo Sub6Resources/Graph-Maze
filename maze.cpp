@@ -9,6 +9,8 @@ Maze::Maze(int _mazeWidth, int _mazeBytes, char *_mazeData) {
     mazeBytes = _mazeBytes;
     mazeData = _mazeData;
     maze = new graph<int>();
+    targetLocation = INT_MAX;
+    startLocation = INT_MIN;
     generateMazeGraph();
 }
 
@@ -22,7 +24,7 @@ void Maze::generateMazeGraph() {
     for (int y = 0; y < numRows; ++y) {
         for (int x = 0; x < mazeWidth; ++x) {
             int index = (mazeWidth * y + x);
-            unsigned char mazeSquare = mazeData[index / 2];
+            char mazeSquare = mazeData[index / 2];
             if(index % 2 == 0) {
                 mazeSquare = mazeSquare >> 4;
             }
@@ -62,4 +64,21 @@ void Maze::generateMazeGraph() {
  */
 int Maze::coords(int x, int y) {
     return (y * mazeWidth) + x;
+}
+
+void Maze::setTargetLocation(int x, int y) {
+    targetLocation = coords(x, y);
+}
+
+void Maze::setStartLocation(int x, int y) {
+    startLocation = coords(x, y);
+}
+
+//Prints an integer
+void printData(int d) {
+    std::cout << d << " ";
+}
+
+void Maze::findShortestPath() {
+    depth_first(::printData, *maze, startLocation);
 }

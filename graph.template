@@ -1,3 +1,6 @@
+#ifndef GRAPH_TEMPLATE_H
+#define GRAPH_TEMPLATE_H
+
 #include <cassert>
 #include <cstdlib>
 #include <set>
@@ -67,3 +70,5 @@ void graph<Item>::remove_edge(std::size_t source, std::size_t target) {
     assert(target < size( ));
     edges[source][target] = false;
 }
+
+#endif
