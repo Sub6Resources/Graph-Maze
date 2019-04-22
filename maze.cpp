@@ -4,9 +4,6 @@
 
 #include "maze.h"
 
-const int MAZE_START = INT_MIN;
-const int MAZE_END = INT_MAX;
-
 Maze::Maze(int _mazeWidth, int _mazeBytes, char *_mazeData) {
     mazeWidth = _mazeWidth;
     mazeBytes = _mazeBytes;
@@ -57,6 +54,12 @@ void Maze::generateMazeGraph() {
     }
 }
 
+/**
+ * Calculates one-dimensional coordinate from an x and a y position in the maze.
+ * @param x The x-coordinate of the point.
+ * @param y The y-coordinate of the point.
+ * @return An integer with the index of the point in a one-dimensional array.
+ */
 int Maze::coords(int x, int y) {
     return (y * mazeWidth) + x;
 }
