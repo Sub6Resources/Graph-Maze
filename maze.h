@@ -15,7 +15,8 @@ public:
     friend std::ostream &operator<<(std::ostream &out, Maze &maze);
     void setTargetLocation(int x, int y);
     void setStartLocation(int x, int y);
-    void findShortestPath();
+    void generateShortestPath();
+    bool inShortestPath(int index);
 private:
     graph<int>* maze;
     char* mazeData;
@@ -23,6 +24,8 @@ private:
     int mazeBytes;
     int targetLocation;
     int startLocation;
+    int* shortestPath;
+    int shortestPathLength;
     void generateMazeGraph();
     int coords(int x, int y);
 };
@@ -41,7 +44,10 @@ inline std::ostream &operator<<(std::ostream &out, Maze &maze) {
             out << "█";
 
             if((mazeSquare & 2) == 2) {
-                out << " ";
+                if(maze.inShortestPath(maze.coords(x, y - 1)) && maze.inShortestPath(index))
+                    out << "•";
+                else
+                    out << " ";
             } else {
                 out << "█";
             }
@@ -61,24 +67,30 @@ inline std::ostream &operator<<(std::ostream &out, Maze &maze) {
                 mazeSquare = mazeSquare >> 4;
             }
 
+            //Print left wall
             if((mazeSquare & 4) == 4) {
-                out << " ";
+                if(maze.inShortestPath(maze.coords(x - 1, y)) && maze.inShortestPath(index))
+                    out << "•";
+                else
+                    out << " ";
             } else {
                 out << "█";
             }
 
             if(maze.targetLocation == index) {
-                out << "x";
+                out << "X";
             } else if(maze.startLocation == index) {
-                out << "o";
+                out << "O";
+            } else if(maze.inShortestPath(index)) {
+                out << "•";
             } else {
-                out << " ";
+                out << ".";
             }
 
             //Print right wall if on last column
             if(x == maze.mazeWidth - 1) {
                 if((mazeSquare & 1) == 1) {
-                    out << " ";
+                    out << ".";
                 } else {
                     out << "█";
                 }

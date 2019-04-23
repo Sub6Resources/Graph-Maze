@@ -11,6 +11,8 @@ Maze::Maze(int _mazeWidth, int _mazeBytes, char *_mazeData) {
     maze = new graph<int>();
     targetLocation = INT_MAX;
     startLocation = INT_MIN;
+    shortestPath = nullptr;
+    shortestPathLength = 0;
     generateMazeGraph();
 }
 
@@ -79,6 +81,35 @@ void printData(int d) {
     std::cout << d << " ";
 }
 
-void Maze::findShortestPath() {
-    depth_first(::printData, *maze, startLocation);
+void Maze::generateShortestPath() {
+    if(targetLocation != INT_MAX && startLocation != INT_MIN) {
+        int *predecessors = shortest_path(*maze, startLocation);
+
+        delete[] shortestPath;
+        shortestPath = new int[maze->size()];
+        int current = targetLocation;
+        int i = 0;
+        while(current != startLocation) {
+            shortestPath[i] = current;
+            current = predecessors[current];
+            ++i;
+        }
+        shortestPath[i] = startLocation;
+        shortestPathLength = i + 1;
+
+        for (int j = 0; j < shortestPathLength; ++j) {
+            std::cout << shortestPath[j] << " ";
+        }
+        std::cout << std::endl;
+    }
+}
+
+bool Maze::inShortestPath(int index) {
+    if(shortestPath != nullptr) {
+        for (int i = 0; i < shortestPathLength; ++i) {
+            if (shortestPath[i] == index)
+                return true;
+        }
+    }
+    return false;
 }

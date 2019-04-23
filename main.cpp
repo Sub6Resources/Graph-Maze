@@ -20,17 +20,33 @@ int main() {
     std::cout << "Maze: " << std::endl;
     std::cout << maze << std::endl;
 
-    maze.setTargetLocation(3, 2);
+    int x, y;
+    std::cout << "Enter x-coordinate of target location: ";
+    std::cin >> x;
+    std::cout << "Enter y-coordinate of target location: ";
+    std::cin >> y;
+    std::cout << std::endl;
+
+    maze.setTargetLocation(x, y);
 
     std::cout << "Maze w/ target location: " << std::endl;
     std::cout << maze << std::endl;
 
-    maze.setStartLocation(2, 3);
+    std::cout << "Enter x-coordinate of start location: ";
+    std::cin >> x;
+    std::cout << "Enter y-coordinate of start location: ";
+    std::cin >> y;
+    std::cout << std::endl;
+
+    maze.setStartLocation(x, y);
 
     std::cout << "Maze w/ start location: " << std::endl;
     std::cout << maze << std::endl;
 
-    maze.findShortestPath();
+    maze.generateShortestPath();
+
+    std::cout << "Solved maze: " << std::endl;
+    std::cout << maze << std::endl;
 
     delete[] newMazeData;
 

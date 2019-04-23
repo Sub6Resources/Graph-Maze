@@ -117,7 +117,6 @@ int* shortest_path(graph<Item> &g, SizeType start) {
         //Loop to determine minimum distance.
         for (int i = 0; i < g.size(); ++i) {
             if (allowed_vertices.find(i) == allowed_vertices.end() && distance[i] <= minDistance) {
-                std::cout << "New min: " << distance[i] << std::endl;
                 next = i;
                 minDistance = distance[i];
             }
@@ -132,7 +131,7 @@ int* shortest_path(graph<Item> &g, SizeType start) {
         int sumDistance = 0;
         for (SizeType v = 0; v < g.size(); ++v) {
             if (allowed_vertices.find(v) == allowed_vertices.end() && g.is_edge(next, v)) {
-                sumDistance = distance[next] + g.edge_weight(next, v);
+                sumDistance = distance[next] + 1; //1 was g.edge_weight(next, v);
                 if (sumDistance < distance[v]) {
                     distance[v] = sumDistance;
                     predecessors[v] = next;
@@ -141,7 +140,7 @@ int* shortest_path(graph<Item> &g, SizeType start) {
         }
     }
 
-    return distance;
+    return predecessors;
 }
 
 #endif
