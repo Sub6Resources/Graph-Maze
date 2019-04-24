@@ -43,6 +43,8 @@ int main() {
     std::cout << "Maze w/ start location: " << std::endl;
     std::cout << maze << std::endl;
 
+    std::cin >> x;
+
     maze.generateShortestPath();
 
     std::cout << "Solved maze: " << std::endl;

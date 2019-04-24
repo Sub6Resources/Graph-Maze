@@ -27,32 +27,28 @@ void Maze::generateMazeGraph() {
         for (int x = 0; x < mazeWidth; ++x) {
             int index = (mazeWidth * y + x);
             char mazeSquare = mazeData[index / 2];
-            if(index % 2 == 0) {
+            if (index % 2 == 0) {
                 mazeSquare = mazeSquare >> 4;
             }
 
             //Bottom
-            if((mazeSquare & 8) != 0) {
-                if(coords(x, y+1) < maze->size())
-                    maze->add_edge(coords(x, y), coords(x, y + 1));
+            if ((mazeSquare & 0x8) != 0 && coords(x, y + 1) < maze->size()) {
+                maze->add_edge(coords(x, y), coords(x, y + 1));
             }
 
             //Left
-            if((mazeSquare & 4) != 0) {
-                if(x-1 >= 0)
-                    maze->add_edge(coords(x, y), coords(x - 1, y));
+            if ((mazeSquare & 0x4) != 0 && x - 1 >= 0) {
+                maze->add_edge(coords(x, y), coords(x - 1, y));
             }
 
             //Top
-            if((mazeSquare & 2) != 0) {
-                if(y-1 >= 0)
-                    maze->add_edge(coords(x, y), coords(x, y - 1));
+            if ((mazeSquare & 0x2) != 0 && y - 1 >= 0) {
+                maze->add_edge(coords(x, y), coords(x, y - 1));
             }
 
             //Right
-            if((mazeSquare & 1) != 0) {
-                if(x + 1 < mazeWidth)
-                    maze->add_edge(coords(x, y), coords(x + 1, y));
+            if ((mazeSquare & 0x1) != 0 && x + 1 < mazeWidth) {
+                maze->add_edge(coords(x, y), coords(x + 1, y));
             }
         }
     }
@@ -82,14 +78,14 @@ void printData(int d) {
 }
 
 void Maze::generateShortestPath() {
-    if(targetLocation != INT_MAX && startLocation != INT_MIN) {
+    if (targetLocation != INT_MAX && startLocation != INT_MIN) {
         int *predecessors = shortest_path(*maze, startLocation);
 
         delete[] shortestPath;
         shortestPath = new int[maze->size()];
         int current = targetLocation;
         int i = 0;
-        while(current != startLocation) {
+        while (current != startLocation) {
             shortestPath[i] = current;
             current = predecessors[current];
             ++i;
@@ -105,7 +101,7 @@ void Maze::generateShortestPath() {
 }
 
 bool Maze::inShortestPath(int index) {
-    if(shortestPath != nullptr) {
+    if (shortestPath != nullptr) {
         for (int i = 0; i < shortestPathLength; ++i) {
             if (shortestPath[i] == index)
                 return true;

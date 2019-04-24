@@ -95,7 +95,7 @@ void breadth_first(Process f, graph<Item> &g, SizeType start) {
 }
 
 template<class Item, class SizeType>
-int* shortest_path(graph<Item> &g, SizeType start) {
+int *shortest_path(graph<Item> &g, SizeType start) {
     int *distance = new int[g.size()];
     int *predecessors = new int[g.size()];
 
