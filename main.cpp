@@ -2,8 +2,8 @@
 #include <vector>
 #include "maze.h"
 
-const int MAZE_SIZE_BYTES = 8; //Size of the .maze file
-const int MAZE_WIDTH = 4; //Width of the maze
+const int MAZE_SIZE_BYTES = 2048; //Size of the .maze file
+const int MAZE_WIDTH = 64; //Width of the maze
 
 int main() {
     std::cout << "Hello, World!" << std::endl;

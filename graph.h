@@ -12,7 +12,7 @@ template<class Item>
 class graph {
 public:
     //Member Constants
-    static const std::size_t MAXIMUM = 20;
+    static const std::size_t MAXIMUM = 4096;
 
     //Constructor
     graph() { many_vertices = 0; }
