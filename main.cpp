@@ -2,13 +2,13 @@
 #include <vector>
 #include "maze.h"
 
-const int MAZE_SIZE_BYTES = 2048; //Size of the .maze file
-const int MAZE_WIDTH = 64; //Width of the maze
+const int MAZE_SIZE_BYTES = 150; //Size of the .maze file
+const int MAZE_WIDTH = 30; //Width of the maze
 
 int main() {
     std::cout << "Hello, World!" << std::endl;
 
-    std::ifstream mazeFile("../small.maze", std::ifstream::binary);
+    std::ifstream mazeFile("../smallish.maze", std::ifstream::binary);
 
     char *newMazeData = new char[MAZE_SIZE_BYTES];
     mazeFile.read(newMazeData, MAZE_SIZE_BYTES);
